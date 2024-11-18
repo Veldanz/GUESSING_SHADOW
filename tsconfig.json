@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"strict": true,
+		"noEmit": false,
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"baseUrl": "./src",
+		"paths": {
+		  "~/*": ["./*"]
+		},
+        "outDir": "./dist",
+		"types": [
+			"phaser"
+		]
+	},
+	"include": [
+		"src/**/*",
+		"types/**/*",
+    	"script-nodes/**/*"
+	]
+}
