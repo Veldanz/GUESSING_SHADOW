@@ -1,78 +1,80 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
-    entry: {
-        main: "./src/index.ts"
-    },
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                phaser: {
-                    test: /[\\/]node_modules[\\/]phaser[\\/]/,
-                    name: "phaser",
-                    chunks: "all",
-                },
-                phasereditor2d: {
-                    test: /[\\/]node_modules[\\/]@phasereditor2d[\\/]/,
-                    name: "phasereditor2d",
-                    chunks: "all",
-                }
-            }
-        }
-    },
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "[name]-[contenthash].bundle.js",
-        assetModuleFilename: "asset-packs/[name]-[hash][ext][query]",
-    },
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: "ts-loader",
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.json/,
-                type: "asset/resource",
-                exclude: /node_modules/,
-            }
-        ],
-    },
-    resolve: {
-        extensions: [".tsx", ".ts", ".js"],
-    },
-    devServer: {
-        historyApiFallback: true,
-        allowedHosts: 'all',
-        static: {
-            directory: path.resolve(__dirname, "./dist"),
+  mode: 'production',
+  entry: './src/index.ts',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[contenthash].bundle.js',
+    clean: true
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        phaser: {
+          test: /[\\/]node_modules[\\/]phaser[\\/]/,
+          name: 'phaser',
+          chunks: 'all',
         },
-        open: true,
-        hot: true,
-        port: 9000,
+        vendor: {
+          test: /[\\/]node_modules[\\/](?!phaser[\\/])/,
+          name: 'vendor',
+          chunks: 'all',
+        }
+      }
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src/index.html"),
-            minify: false
-        }),
-        new CleanWebpackPlugin(),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: "static",
-                    globOptions: {
-                        // asset pack files are imported in code as modules
-                        ignore: ["**/publicroot", "**/*-pack.json"]
-                    }
-                }
-            ]
-        }),
-        new webpack.HotModuleReplacementPlugin(),
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.sharpMinify,
+          options: {
+            encodeOptions: {
+              webp: {
+                quality: 80
+              },
+              png: {
+                quality: 80
+              }
+            }
+          }
+        }
+      })
     ]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024 // 8kb
+          }
+        }
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js']
+  },
+  performance: {
+    hints: 'warning',
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  }
 };
