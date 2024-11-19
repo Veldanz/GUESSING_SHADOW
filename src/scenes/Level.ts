@@ -16,12 +16,12 @@ export default class Level extends Phaser.Scene {
 
 	private readonly CONFIG = {
         mainPicture: {
-            scale: 0.15,
+            scale: 1,
             width: 400,  // Optional: set specific width
             height: 300  // Optional: set specific height
         },
         shadows: {
-            scale: 0.13,
+            scale: 0.4,
             width: 300,  // Optional: set specific width
             height: 200  // Optional: set specific height
         }
@@ -55,7 +55,7 @@ export default class Level extends Phaser.Scene {
             this.scale.height / 4, 
             "Pic_elephant"
         );
-        this.container_picture.setScale(0.15);
+        this.container_picture.setScale(0.5);
 
 		
         

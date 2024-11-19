@@ -41,8 +41,8 @@ export default class Shadow extends Phaser.GameObjects.Image {
     public setInteractiveState(interactive: boolean): void {
         if (interactive) {
             this.setInteractive();
-            this.on('pointerover', () => { if(this.active) this.setScale(0.16); })
-            this.on('pointerout', () => { if(this.active) this.setScale(0.13); });
+            this.on('pointerover', () => { if(this.active) this.setScale(0.45); })
+            this.on('pointerout', () => { if(this.active) this.setScale(0.4); });
             this.clearTint();
         } else {
             this.disableInteractive();
