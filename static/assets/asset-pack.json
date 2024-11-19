@@ -2,32 +2,32 @@
     "section1": {
         "files": [
             {
-                "url": "https://i.imgur.com/btv1Uif.png",
+                "url": "assets/BG-min.png",
                 "type": "image",
                 "key": "BG"
             },
             {
-                "url": "https://i.imgur.com/Kh2pV9Y.png",
+                "url": "assets/PIC-min.png",
                 "type": "image",
                 "key": "Pic_elephant"
             },
             {
-                "url": "https://i.imgur.com/f5ti5mD.png",
+                "url": "assets/EL_T-min.png",
                 "type": "image",
                 "key": "shadow_elephant_t"
             },
             {
-                "url": "https://i.imgur.com/kMPezdp.png",
+                "url": "assets/EL_F1-min.png",
                 "type": "image",
                 "key": "shadow_elephant_f_1"
             },
             {
-                "url": "https://i.imgur.com/QZCewmu.png",
+                "url": "assets/EL_F2-min.png",
                 "type": "image",
                 "key": "shadow_elephant_f_2"
             },
             {
-                "url": "https://i.imgur.com/XzTILOQ.png",
+                "url": "assets/EL_F3-min.png",
                 "type": "image",
                 "key": "shadow_elephant_f_3"
             }
