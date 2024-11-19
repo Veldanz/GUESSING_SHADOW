@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+//import Phaser from "phaser";
 import Level from "../scenes/Level";
 
 export default class Shadow extends Phaser.GameObjects.Image {
