@@ -195,7 +195,7 @@ export default class Level extends Phaser.Scene {
                     if (permission) this.requestShadow();
                     break;
                 }
-                case "serverGameUndate": {
+                case "serverGameUpdate": {
                     this.updateState(data.payload);
                     break;
                 }
