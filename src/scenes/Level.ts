@@ -84,7 +84,7 @@ export default class Level extends Phaser.Scene {
             this.shadowContainer.addShadow(shadow);
         });
 
-        // Set background color
+        //Set background color
         //this.cameras.main.setBackgroundColor('#ffffff');
 
         this.events.emit("scene-awake");
