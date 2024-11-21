@@ -84,7 +84,36 @@ export default class Level extends Phaser.Scene {
                 );
             }
             this.shadowContainer.addShadow(shadow);
+            shadow.setInteractive();
+            //shadow.on('pointerdown', () => this.handleShadowClick(isCorrect));
         });
+
+        /*this.socket = io("http://localhost:3000");
+        
+        this.otherPlayerCursors = this.add.container();
+        // Listen for other players' mouse updates
+        this.socket.on("updatePlayerMouse", (data: { playerId: string; x: number; y: number }) => {
+            this.updateOtherPlayerCursor(data);
+        });
+    
+        // Remove a player’s cursor when they disconnect
+        this.socket.on("playerDisconnected", (playerId: string) => {
+            this.removeOtherPlayerCursor(playerId);
+        });
+    
+        // Listen for server updates
+        this.socket.on("serverGameUpdate", (gameState: GameStateContent) => {
+            console.info("Received game state update:", gameState);
+            this.updateGameState(gameState);
+        });
+    
+        this.socket.on("serverMessage", (message: { text: string }) => {
+            this.showMessage(message.text, "#00ff00");
+        });
+  
+        // Start the game
+        this.socket.emit("clientStartGame");*/
+      
 
         //Set background color
         //this.cameras.main.setBackgroundColor('#ffffff');
@@ -93,6 +122,13 @@ export default class Level extends Phaser.Scene {
         // Enable shadows to ensure hover works from the start
         this.shadowContainer.enableAllShadows(); 
     }
+    /*updateGameState(gameState: GameStateContent): void {
+        this.gameState = gameState;
+    
+        if (gameState?.wrongGuessCount >= 3) {
+          this.showGameOverScreen();
+        }
+      }*/
 
     guessShadow(isCorrect: boolean): void {
         if (isCorrect) {
@@ -258,4 +294,20 @@ export default class Level extends Phaser.Scene {
             wrongGuessCount: 0,
         };
     }
+    /*private otherPlayerCursors: Phaser.GameObjects.Container;
+    private updateOtherPlayerCursor(data: { playerId: string; x: number; y: number }): void {
+        let cursor = this.otherPlayerCursors.getByName(data.playerId) as Phaser.GameObjects.Image;
+    
+        if (!cursor) {
+          cursor = this.add.image(data.x, data.y, "cursorTexture").setName(data.playerId);
+          this.otherPlayerCursors.add(cursor);
+        }
+    
+        cursor.setPosition(data.x, data.y);
+      }
+    
+      private removeOtherPlayerCursor(playerId: string): void {
+        const cursor = this.otherPlayerCursors.getByName(playerId) as Phaser.GameObjects.Image;
+        if (cursor) cursor.destroy();
+      }*/
 }
