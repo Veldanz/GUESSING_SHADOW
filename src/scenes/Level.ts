@@ -3,6 +3,7 @@ import Phaser from "phaser";
 import ShadowContainer from "../prefabs/ShadowContainer";
 import { GameInfo, GameStateContent, UserInformation } from "~/data/gameState";
 import Shadow from "../prefabs/Shadow";
+import { io, Socket } from "socket.io-client";
 
 export default class Level extends Phaser.Scene {
     private container_picture!: Phaser.GameObjects.Image;
@@ -13,6 +14,7 @@ export default class Level extends Phaser.Scene {
     private wrongGuessCount: number = 0;
     private gameOverText?: Phaser.GameObjects.Text;
     private shadowContainer!: ShadowContainer;
+    private socket: Socket | undefined;
 
 	private readonly CONFIG = {
         mainPicture: {
