@@ -1,4 +1,4 @@
-//import Phaser from "phaser";
+import Phaser from "phaser";
 //import ShadowPrefab from "../prefabs/Shadow";
 import ShadowContainer from "../prefabs/ShadowContainer";
 import { GameInfo, GameStateContent, UserInformation } from "~/data/gameState";
