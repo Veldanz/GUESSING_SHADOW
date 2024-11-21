@@ -96,7 +96,7 @@ export default class Level extends Phaser.Scene {
             this.updateOtherPlayerCursor(data);
         });
     
-        // Remove a player’s cursor when they disconnect
+        // Remove a player’s cursor when they disconnect```javascript
         this.socket.on("playerDisconnected", (playerId: string) => {
             this.removeOtherPlayerCursor(playerId);
         });
